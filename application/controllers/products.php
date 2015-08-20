@@ -49,17 +49,24 @@ class Products extends CI_Controller {
 		$name = $this->input->post('name');
         $description = $this->input->post('description');
         $price = $this->input->post('price');
-    	$this->load->model("Product");
-        $product_details = array(
-            "name" => $name,
-            "description" => $description,
-            "price" => $price
-        ); 
-        $add_product = $this->Product->add_product($product_details);
-        if($add_product === TRUE)
-        {
-            redirect('/');
-        }	
+        if(!is_numeric($price)){
+        	$this->session->set_userdata('error', 'Price must be numeric!');
+        	$this->new_product();
+        }
+        else{
+        	$this->load->model("Product");
+	        $product_details = array(
+	            "name" => $name,
+	            "description" => $description,
+	            "price" => $price
+	        ); 
+	        $add_product = $this->Product->add_product($product_details);
+	        if($add_product === TRUE)
+	        {
+	            redirect('/');
+	        }	
+        }
+    	
 	}
 	public function destroy($id){
 		$this->load->model("Product");
@@ -73,18 +80,24 @@ class Products extends CI_Controller {
 		$name = $this->input->post('name');
         $description = $this->input->post('description');
         $price = $this->input->post('price');
-    	$this->load->model("Product");
-        $product_details = array(
-            "id" => $id,
-            "name" => $name,
-            "description" => $description,
-            "price" => $price
-        ); 
-        $update_product = $this->Product->update_product($product_details);
-        if($update_product === TRUE)
-        {
-            redirect('/');
-        }	
+        if(!is_numeric($price)){
+        	$this->session->set_userdata('error', 'Price must be numeric!');
+        	$this->edit($id);
+        }
+        else{
+        	$this->load->model("Product");
+	        $product_details = array(
+	            "id" => $id,
+	            "name" => $name,
+	            "description" => $description,
+	            "price" => $price
+	        ); 
+	        $update_product = $this->Product->update_product($product_details);
+	        if($update_product === TRUE)
+	        {
+	            redirect('/');
+	        }	
+        }
 	}
 }
 
