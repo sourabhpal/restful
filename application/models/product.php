@@ -18,5 +18,11 @@
 		{
 			return $this->db->query("DELETE FROM products WHERE id = ?", $product_id);	
 		}
+		function update_product($product)
+		{
+			$query = "UPDATE products SET name = ?, description = ?, price = ? WHERE id = ?";
+			$values = array($product['name'], $product['description'], $product['price'], $product['id']);
+			return $this->db->query($query, $values);
+		}
 	}
  ?>

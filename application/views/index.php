@@ -18,8 +18,9 @@
   			text-align: center;
   		}
   		button {
-  			float: right;
+  			float: left;
   			margin-top: 5px;
+        margin-left: 150px;
   		}
   		.form-control {
   			margin: 5px;
@@ -60,11 +61,14 @@
 	<?php 
   foreach ($id as $key => $value)
     {
-      echo "<tr><td>{$id[$key]}</td><td>{$name[$key]}</td><td>{$description[$key]}</td><td>{$price[$key]}</td><td><a href=\"courses/show/$value\">Show</a> | <a href=\"courses/edit/$value\">Edit</a> | <a href=\"courses/destroy/$value\">Remove</a></td></tr>";
+      echo "<tr><td>{$id[$key]}</td><td>{$name[$key]}</td><td>{$description[$key]}</td><td>{$price[$key]}</td><td><a href=\"/products/show/$value\">Show</a> | <a href=\"/products/edit/$value\">Edit</a> | <a href=\"/products/destroy/$value\">Remove</a></td></tr>";
     }
 	?>
 			</tbody>
 		</table>
-	</div>
+   <form action="/products/new_product">
+    <input type="hidden" action="action" value="add">
+    <button type="submit" class="btn-primary">Add a new product</button>
+  </form>
 </body>
 </html>

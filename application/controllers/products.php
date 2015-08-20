@@ -33,22 +33,53 @@ class Products extends CI_Controller {
 		$this->load->view('index', $p);
 	}
 	public function new_product(){
-
+		$this->load->view('new_product');
 	}
-	public function edit(){
-
+	public function edit($id){
+		$this->load->model('Product');
+		$p = $this->Product->get_product_by_id($id);
+		$this->load->view('edit_product', $p);
 	}
-	public function show(){
-
+	public function show($id){
+		$this->load->model('Product');
+		$p = $this->Product->get_product_by_id($id);
+		$this->load->view('show_product', $p);
 	}
 	public function create(){
-
+		$name = $this->input->post('name');
+        $description = $this->input->post('description');
+        $price = $this->input->post('price');
+    	$this->load->model("Product");
+        $product_details = array(
+            "name" => $name,
+            "description" => $description,
+            "price" => $price
+        ); 
+        $add_product = $this->Product->add_product($product_details);
+        if($add_product === TRUE)
+        {
+            redirect('/');
+        }	
 	}
 	public function destroy(){
 
 	}
-	public function update(){
-
+	public function update($id){
+		$name = $this->input->post('name');
+        $description = $this->input->post('description');
+        $price = $this->input->post('price');
+    	$this->load->model("Product");
+        $product_details = array(
+            "id" => $id,
+            "name" => $name,
+            "description" => $description,
+            "price" => $price
+        ); 
+        $update_product = $this->Product->update_product($product_details);
+        if($update_product === TRUE)
+        {
+            redirect('/');
+        }	
 	}
 }
 
