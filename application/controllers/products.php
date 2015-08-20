@@ -61,8 +61,13 @@ class Products extends CI_Controller {
             redirect('/');
         }	
 	}
-	public function destroy(){
-
+	public function destroy($id){
+		$this->load->model("Product");
+    	$delete_product = $this->Product->delete_product_by_id($id);
+    	if($delete_product === TRUE)
+        {
+            redirect('/');
+        }
 	}
 	public function update($id){
 		$name = $this->input->post('name');
